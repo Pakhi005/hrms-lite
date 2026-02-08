@@ -30,10 +30,10 @@ export async function POST(request) {
         const employee = await Employee.create(body);
         return NextResponse.json(employee, { status: 201 });
     } catch (error) {
-        console.error(error);
+        console.error("❌ Employee Creation Error:", error);
         if (error.name === 'ValidationError') {
             return NextResponse.json({ error: error.message }, { status: 400 });
         }
-        return NextResponse.json({ error: 'Failed to create employee' }, { status: 500 });
+        return NextResponse.json({ error: error.message || 'Failed to create employee' }, { status: 500 });
     }
 }
