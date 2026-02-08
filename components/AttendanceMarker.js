@@ -60,7 +60,7 @@ export default function AttendanceMarker({ employees, onAttendanceMarked }) {
                         >
                             <option value="">Select Employee</option>
                             {employees.map(emp => (
-                                <option key={emp.id} value={emp.id}>
+                                <option key={emp.idString} value={emp.idString}>
                                     {emp.name} ({emp.employeeId})
                                 </option>
                             ))}

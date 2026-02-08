@@ -3,29 +3,30 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Employee {
-  idString    String       @id @default(uuid())
-  employeeId  String       @unique
+  idString    String   @id @default(uuid())
+  employeeId  String   @unique
   name        String
-  email       String       @unique
+  email       String   @unique
   department  String
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  Attendance  Attendance[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  attendance  Attendance[]
 }
 
 model Attendance {
-  idString    String    @id @default(uuid())
-  employeeId  String
-  date        DateTime
-  status      String    // PRESENT, ABSENT
-  employee    Employee  @relation(fields: [employeeId], references: [idString], onDelete: Cascade)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id        String   @id @default(uuid())
+  date      DateTime
+  status    String   // PRESENT or ABSENT
+  createdAt DateTime @default(now())
+  
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [idString], onDelete: Cascade)
 
   @@unique([employeeId, date])
 }

@@ -38,7 +38,7 @@ export default function EmployeeList({ employees, loading, onDelete }) {
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                         {employees.map((emp) => (
-                            <tr key={emp.id} className="hover:bg-slate-50/80 transition-colors duration-150">
+                            <tr key={emp.idString} className="hover:bg-slate-50/80 transition-colors duration-150">
                                 <td className="px-6 py-4 text-sm font-mono text-slate-500">{emp.employeeId}</td>
                                 <td className="px-6 py-4">
                                     <div className="text-sm font-semibold text-slate-900">{emp.name}</div>
@@ -52,7 +52,7 @@ export default function EmployeeList({ employees, loading, onDelete }) {
                                 <td className="px-6 py-4 text-right">
                                     <button
                                         onClick={() => {
-                                            if (confirm('Delete this employee?')) onDelete(emp.id);
+                                            if (confirm('Delete this employee?')) onDelete(emp.idString);
                                         }}
                                         className="text-slate-400 hover:text-red-600 transition-colors duration-200 p-1 rounded-md hover:bg-red-50"
                                         title="Delete Employee"

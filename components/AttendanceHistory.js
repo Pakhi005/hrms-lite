@@ -58,7 +58,7 @@ export default function AttendanceHistory() {
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                         {records.map((record) => (
-                            <tr key={record.idString} className="hover:bg-slate-50/80 transition-colors duration-150">
+                            <tr key={record.id} className="hover:bg-slate-50/80 transition-colors duration-150">
                                 <td className="px-6 py-4 text-sm text-slate-600 font-mono">
                                     {new Date(record.date).toLocaleDateString()}
                                 </td>
@@ -71,8 +71,8 @@ export default function AttendanceHistory() {
                                 </td>
                                 <td className="px-6 py-4 text-sm">
                                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold border ${record.status === 'PRESENT'
-                                            ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
-                                            : 'bg-red-50 text-red-700 border-red-100'
+                                        ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
+                                        : 'bg-red-50 text-red-700 border-red-100'
                                         }`}>
                                         <span className={`h-1.5 w-1.5 rounded-full ${record.status === 'PRESENT' ? 'bg-emerald-500' : 'bg-red-500'}`}></span>
                                         {record.status}

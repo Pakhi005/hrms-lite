@@ -1,21 +1,17 @@
 import { NextResponse } from 'next/server';
-import dbConnect from '@/lib/mongodb';
-import Employee from '@/models/Employee';
-import Attendance from '@/models/Attendance';
+import prisma from '@/lib/prisma';
 
 export async function DELETE(request, { params }) {
     try {
         const { id } = params;
-        await dbConnect();
 
-        // Cascading delete is not automatic in Mongoose unless middleware is used.
-        // Manual deletion is safer/explicit here.
-        await Employee.findByIdAndDelete(id);
-        await Attendance.deleteMany({ employee: id });
+        await prisma.employee.delete({
+            where: { idString: id }
+        });
 
         return NextResponse.json({ message: 'Employee deleted successfully' });
     } catch (error) {
-        console.error(error);
+        console.error("❌ Delete Error:", error);
         return NextResponse.json({ error: 'Failed to delete employee' }, { status: 500 });
     }
 }
